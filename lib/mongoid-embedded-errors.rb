@@ -25,7 +25,7 @@ module Mongoid
             # get each of their individual message and add them to the parent's errors:
             if rel.errors.any?
               rel.errors.messages.each do |k, v|
-                rel_metadata = rel.try(:relation_metadata) || rel.metadata
+                rel_metadata = rel.try(:metadata) || rel.relation_metadata
                 key = (rel_metadata.relation == Mongoid::Relations::Embedded::Many ? "#{name}[#{i}].#{k}" : "#{name}.#{k}").to_sym
                 errs.delete(key)
                 errs[key] = v
